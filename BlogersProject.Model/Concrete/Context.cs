@@ -14,9 +14,8 @@ namespace BlogersProject.Model.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-JERGKNG;initial catalog=BlogerDB;integrated Security=true");
+            optionsBuilder.UseSqlServer("Server = DESKTOP-JERGKNG; Database = BlogsDB; Trusted_Connection = True; TrustServerCertificate = True;");
         }
-
         public DbSet<Blog> Blogs { get; set; }
 
 
