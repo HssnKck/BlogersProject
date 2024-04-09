@@ -12,9 +12,9 @@ namespace BlogersProject.Model.Concrete
 {
     public class Context : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public Context(DbContextOptions<Context> dbContext) : base(dbContext)
         {
-            optionsBuilder.UseSqlServer("Server = DESKTOP-JERGKNG; Database = BlogsDB; Trusted_Connection = True; TrustServerCertificate = True;");
+            
         }
         public DbSet<Blog> Blogs { get; set; }
 

@@ -1,4 +1,5 @@
-using BlogersProject.WebUI.Models;
+using BlogersProject.Model.Concrete;
+using BlogersProject.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,11 +7,11 @@ namespace BlogersProject.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly Context _db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(Context db)
         {
-            _logger = logger;
+            _db = db;
         }
 
         public IActionResult Index()
@@ -23,10 +24,12 @@ namespace BlogersProject.WebUI.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public IActionResult Privacy(Blog B)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            _db.Blogs.Add(B);
+
+            return  _db.SaveChanges() > 0 ? RedirectToAction("Index") : View();
         }
     }
 }

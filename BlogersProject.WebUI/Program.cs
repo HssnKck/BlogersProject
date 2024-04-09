@@ -1,10 +1,13 @@
 using BlogersProject.Model.Concrete;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<Context>();
+builder.Services.AddMvc();
+
+builder.Services.AddDbContext<Context>(options => options.UseSqlServer("Server=DESKTOP-JERGKNG; Database=BlogsDB; Trusted_Connection=True; TrustServerCertificate=True;"));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
