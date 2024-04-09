@@ -13,23 +13,18 @@ namespace BlogersProject.WebUI.Controllers
         {
             _db = db;
         }
-
         public IActionResult Index()
         {
-            return View();
+            return View(_db.Blogs.ToList());
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
         {
             return View();
         }
-
-        [HttpPost]
-        public IActionResult Privacy(Blog B)
+        public IActionResult Contact()
         {
-            _db.Blogs.Add(B);
-
-            return  _db.SaveChanges() > 0 ? RedirectToAction("Index") : View();
+            return View();
         }
     }
 }
