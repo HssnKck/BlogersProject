@@ -33,10 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\adminTheme\plugins\block-ui\node_modules\jquery\dist\jquery.js" />
     <None Include="wwwroot\adminTheme\plugins\block-ui\node_modules\jquery\dist\jquery.min.js" />
     <None Include="wwwroot\adminTheme\plugins\block-ui\node_modules\jquery\dist\jquery.min.map" />

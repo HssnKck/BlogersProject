@@ -1,0 +1,32 @@
+﻿@model BlogersProject.Model.Entities.Blog
+@{
+    ViewData["Title"] = "UpdateBlog";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<form method="post" asp-area="Admin" asp-controller="Blog" asp-action="UpdateBlog">
+    <input type="text" asp-for="BlogTitle" value="@Model.BlogTitle" />
+    <input type="text" asp-for="BlogPost" value="@Model.BlogPost" />
+    <input type="text" asp-for="Blogger" value="@Model.Blogger" />
+    <input type="submit" value="kaydet">
+</form>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+

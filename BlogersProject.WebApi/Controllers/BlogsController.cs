@@ -45,7 +45,12 @@ namespace BlogersProject.WebApi.Controllers
         {
             try
             {
-                _db.Blogs.Update(B);
+                var Record = _db.Blogs.Find(B.Id);
+                Record.BlogTitle = B.BlogTitle;
+                Record.BlogPost = B.BlogPost;
+                Record.Blogger = B.Blogger;
+                Record.BlogDate = DateTime.Now;
+                _db.Blogs.Update(Record);
                 return _db.SaveChanges() > 0 ? true : false;
             }
             catch (Exception)
