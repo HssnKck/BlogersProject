@@ -1,28 +1,33 @@
 using BlogersProject.Model.Concrete;
 using BlogersProject.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Text;
 
 namespace BlogersProject.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly Context _db;
+        public async Task<IActionResult> Index()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync("https://localhost:7053/api/Blogs/GetList");
 
-        public HomeController(Context db)
-        {
-            _db = db;
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var blog = JsonConvert.DeserializeObject<List<Blog>>(content);
+                    return View(blog);
+                }
+                else
+                {
+                    return RedirectToAction("Eror", "Home");
+                }
+            }
         }
-        public IActionResult Index()
-        {
-            return View(_db.Blogs.ToList());
-        }
-
-        public IActionResult About()
-        {
-            return View();
-        }
-        public IActionResult Contact()
+        public IActionResult Eror()
         {
             return View();
         }

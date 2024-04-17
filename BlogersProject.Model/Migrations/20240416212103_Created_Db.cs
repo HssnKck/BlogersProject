@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BlogersProject.Model.Migrations
 {
     /// <inheritdoc />
-    public partial class Firs_1 : Migration
+    public partial class Created_Db : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,6 +18,7 @@ namespace BlogersProject.Model.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BlogTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BlogFirst = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BlogPost = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Blogger = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BlogDate = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -26,6 +27,20 @@ namespace BlogersProject.Model.Migrations
                 {
                     table.PrimaryKey("PK_Blogs", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Commentators = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -33,6 +48,9 @@ namespace BlogersProject.Model.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Blogs");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
         }
     }
 }

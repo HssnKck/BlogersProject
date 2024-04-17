@@ -12,7 +12,7 @@ namespace BlogersProject.WebUI.Areas.Admin.Controllers
     [Area("Admin")]
     public class BlogController : Controller
     {
-        public async Task<IActionResult> AddBlog()
+        public IActionResult AddBlog()
         {
             return View();
         }
@@ -27,7 +27,7 @@ namespace BlogersProject.WebUI.Areas.Admin.Controllers
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
                 using (var client = new HttpClient())
-                {
+                    {
                     var result = await client.PostAsync("https://localhost:7053/api/Blogs/CreateBlog", content);
                     if (result.IsSuccessStatusCode)
                     {

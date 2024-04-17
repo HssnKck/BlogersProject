@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogersProject.Model.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240409200454_Firs_1")]
-    partial class Firs_1
+    [Migration("20240417004924_Add_Fixed_3")]
+    partial class Add_Fixed_3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,10 @@ namespace BlogersProject.Model.Migrations
                     b.Property<DateTime>("BlogDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("BlogFirst")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("BlogPost")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -51,6 +55,49 @@ namespace BlogersProject.Model.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("BlogersProject.Model.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CommentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Commentators")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comments")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("BlogersProject.Model.Entities.Comment", b =>
+                {
+                    b.HasOne("BlogersProject.Model.Entities.Blog", "Blog")
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogId");
+
+                    b.Navigation("Blog");
+                });
+
+            modelBuilder.Entity("BlogersProject.Model.Entities.Blog", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

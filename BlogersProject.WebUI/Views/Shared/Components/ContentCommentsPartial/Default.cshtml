@@ -1,0 +1,12 @@
+﻿@model IEnumerable<BlogersProject.Model.Entities.Comment>
+<h2>Yorumlar</h2>
+<hr class="my-4" />
+@foreach (var item in Model)
+{
+    <p class="post-meta">
+        <h5>Kullanıcı Adı : @item.Commentators</h5>
+        @item.Comments <br />
+        Tarih; @item.CommentDate
+    </p>
+    <hr class="my-4" />
+}

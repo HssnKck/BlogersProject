@@ -23,13 +23,13 @@
             {
                 <!-- Post preview-->
                 <div class="post-preview">
-                    <a href="~/startbootstrap/post.html">
+                    <a asp-controller="Content" asp-action="Index" asp-route-id="@item.Id">
                         <h2 class="post-title">@item.BlogTitle</h2>
-                        <h3 class="post-subtitle">@item.BlogPost</h3>
+                        <h3 class="post-subtitle">@item.BlogFirst</h3>
                     </a>
                     <p class="post-meta">
                         Blog Yazarı
-                        <a href="#!">@item.Blogger</a>
+                        <a href="#">@item.Blogger</a>
                         Tarih; @item.BlogDate
                     </p>
                 </div>

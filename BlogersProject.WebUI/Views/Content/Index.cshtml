@@ -1,0 +1,50 @@
+﻿@model BlogersProject.Model.Entities.Blog
+@{
+    ViewData["Title"] = "Content";
+}
+<!-- Page Header-->
+<header class="masthead" style="background-color :cadetblue">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>@Model.BlogTitle</h1>
+                    <h5>@Model.BlogFirst</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>@Model.BlogPost</p>
+                <p class="post-meta">
+                    Blog Yazarı
+                    <a href="#">@Model.Blogger</a>
+                    Tarih; @Model.
+
+                </p>
+                @await Component.InvokeAsync("ContentCommentsPartial",Model.Id)
+                <P>
+                    Bizimle Düşüncelerinizi Paylaşmak İstermisiniz ?
+                </P>
+                <form id="contactForm" asp-controller="Content" asp-action="Index" method="post">
+                    <div class="form-floating">
+                        <input class="form-control" id="name" type="text" placeholder="Enter your name..." name="Name" />
+                        <label for="name">İsminiz</label>
+                    </div>
+                    <div class="form-floating">
+                        <textarea class="form-control" id="message" placeholder="Enter your message here..." name="Comment" style="height: 12rem"></textarea>
+                        <label for="message">Yorumunuz...</label>
+                    </div>
+                    <input type="hidden" asp-for="Id" value="@Model.Id"/>
+                    <br />
+                    <input class="btn btn-primary text-uppercase" id="submitButton" type="submit" value="Gönder" />
+                </form>
+            </div>
+        </div>
+    </div>
+</article>

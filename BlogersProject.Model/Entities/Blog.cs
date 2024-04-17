@@ -10,9 +10,11 @@ namespace BlogersProject.Model.Entities
     {
         public int Id { get; set; }
         public string BlogTitle { get; set; }
+        public string BlogFirst { get; set; }
         public string BlogPost { get; set; }
         public string Blogger { get; set; }
         public DateTime BlogDate { get; set; } = DateTime.Now;
+        public virtual ICollection<Comment>? Comments { get; set; }
 
     }
 }

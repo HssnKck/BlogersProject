@@ -4,6 +4,7 @@ using BlogersProject.Model.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogersProject.Model.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240416212103_Created_Db")]
+    partial class Created_Db
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,12 +65,6 @@ namespace BlogersProject.Model.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BlogId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CommentDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Commentators")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -78,23 +75,7 @@ namespace BlogersProject.Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlogId");
-
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("BlogersProject.Model.Entities.Comment", b =>
-                {
-                    b.HasOne("BlogersProject.Model.Entities.Blog", "Blog")
-                        .WithMany("Comments")
-                        .HasForeignKey("BlogId");
-
-                    b.Navigation("Blog");
-                });
-
-            modelBuilder.Entity("BlogersProject.Model.Entities.Blog", b =>
-                {
-                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }
