@@ -1,0 +1,34 @@
+﻿@model BlogersProject.Model.Entities.User
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş</title>
+    <link rel="preconnect" href="~/css/loginPanel.css">
+    <link rel="preconnect" href="~/css/LoginPanel.css" crossorigin>
+    <link href="~/css/LoginPanel.css" rel="stylesheet">
+</head>
+<body>
+    <form asp-controller="Login" asp-action="Index" method="post">
+        <div class="login__forms">
+            <div class="login__box">
+                <ion-icon class="fs-20"></ion-icon>
+                <input type="text" asp-for="UserName" placeholder="Kullanıcı Adı" autocomplete="off">
+            </div>
+            <div class="login__box">
+                <ion-icon class="fs-20" name="lock-closed-outline"></ion-icon>
+                <input type="password" asp-for="Password" placeholder="Şifreniz">
+            </div>
+            <input class="btn-login" type="submit" value="Giriş" />
+        </div>
+    </form>
+    <script type="module" src="~/css/LoginPanel.css"></script>
+    <script nomodule src="~/css/LoginPanel.css"></script>
+</body>
+</html>

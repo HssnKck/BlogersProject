@@ -2,13 +2,11 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h1 style="text-align:center">Bloglar</h1>
-<a asp-area="Admin" asp-controller="Blog" asp-action="AddBlog" class="btn btn-primary">Yeni Blog Ekle</a>
-
-
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body">
+            <h1 style="text-align:center">Bloglar</h1>
+            <a asp-area="Admin" asp-controller="Blog" asp-action="AddBlog" class="btn btn-primary">Yeni Blog Ekle</a>
             <div class="table-responsive">
                 <table class="table table-bordered verticle-middle">
                     <thead>
@@ -30,8 +28,9 @@
                                 <td>@item.BlogDate</td>
                                 <td>
                                     <span>
-                                        <a asp-area="Admin" asp-controller="Blog" asp-action="UpdateBlog" asp-route-id="@item.Id" asp data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-                                        <a asp-area="Admin" asp-controller="Blog" asp-action="DeleteBlog" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a>
+                                        <a asp-area="Admin" asp-controller="Blog" asp-action="UpdateBlog" asp-route-id="@item.Id" asp data-toggle="tooltip" data-placement="top" title="Düzenle"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
+                                        <a asp-area="Admin" asp-controller="Blog" asp-action="DeleteBlog" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Sil"><i class="fa fa-close color-danger"></i></a>
+                                        <a asp-area="Admin" asp-controller="Comment" asp-action="Index" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Yorumlar"><i class="fa fa-paper-plane"></i></a>
                                     </span>
                                 </td>
                             </tr>

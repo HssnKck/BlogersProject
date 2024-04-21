@@ -2,31 +2,55 @@
 @{
     ViewData["Title"] = "AddBlog";
 }
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<form method="post" asp-area="Admin" asp-controller="Blog" asp-action="AddBlog">
-    <input type="text" asp-for="BlogTitle" placeholder="Başlık" />
-    <input type="text" asp-for="BlogFirst" placeholder="Özet Cümle" />
-    <input type="text" asp-for="BlogPost" placeholder="İçerik" />
-    <input type="text" asp-for="Blogger" placeholder="Yazar" />
-    <input type="submit" value="kaydet">
-</form>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-validation">
+                        <form class="form-valide" method="post" asp-area="Admin" asp-controller="Blog" asp-action="AddBlog">
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">
+                                    Başlık <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="val-username" placeholder="Lütfen Başlık Giriniz" asp-for="BlogTitle">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">
+                                    Özet Cümle <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="val-username" placeholder="Lütfen Özet Cümle Giriniz" asp-for="BlogFirst">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-suggestions">
+                                    Blog İçeriği <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <textarea class="form-control" id="val-suggestions" rows="5" placeholder="Lütfen Blog İçeriği Giriniz" asp-for="BlogPost"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">
+                                    Yazar Adı <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="val-username" placeholder="Lütfen Yazar Adı Giriniz" asp-for="Blogger">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-8 ml-auto">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 

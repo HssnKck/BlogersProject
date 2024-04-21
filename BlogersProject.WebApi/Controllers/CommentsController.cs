@@ -31,7 +31,7 @@ namespace CommentersProject.WebApi.Controllers
         [HttpGet("GetRecord")]
         public Comment GetByID(int id)
         {
-            return _db.Comments.Find(id);
+            return _db.Comments.SingleOrDefault(x=>x.Id==id);
         }
         
         [HttpPost("CreateComment")]

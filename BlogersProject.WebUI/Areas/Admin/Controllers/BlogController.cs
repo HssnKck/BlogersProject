@@ -1,6 +1,7 @@
 ﻿using Azure;
 using BlogersProject.Model.Concrete;
 using BlogersProject.Model.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
@@ -10,6 +11,7 @@ using System.Text;
 namespace BlogersProject.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class BlogController : Controller
     {
         public IActionResult AddBlog()
@@ -19,7 +21,7 @@ namespace BlogersProject.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBlog(Blog B)
         {
-
+           
             try
             {
                 var jsonData = JsonConvert.SerializeObject(B);

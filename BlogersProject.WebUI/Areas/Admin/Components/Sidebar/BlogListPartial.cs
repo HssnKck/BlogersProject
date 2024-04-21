@@ -1,16 +1,12 @@
-﻿using BlogersProject.Model.Concrete;
-using BlogersProject.Model.Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using BlogersProject.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace BlogersProject.WebUI.Areas.Admin.Controllers
+namespace BlogersProject.WebUI.Areas.Admin.Components.Sidebar
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
-    public class HomeController : Controller
+    public class BlogListPartial : ViewComponent
     {
-		public async Task<IActionResult> Index()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             using (var client = new HttpClient())
             {
@@ -24,19 +20,9 @@ namespace BlogersProject.WebUI.Areas.Admin.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Eror", "Home");
+                    return View("Eror");
                 }
             }
-           
         }
-        
-        public IActionResult Eror()
-        {
-            return View();
-        }
-
-
-
-
     }
 }

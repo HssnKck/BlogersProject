@@ -2,37 +2,41 @@
 using BlogersProject.Model.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.RateLimiting;
 
 namespace BlogersProject.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BlogsController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly Context _db;
 
 
-        public BlogsController(Context db)
+        public UsersController(Context db)
         {
             _db = db;
         }
         [HttpGet("GetList")]
-        public List<Blog> GetAll()
+        public List<User> GetAll()
         {
-            return _db.Blogs.ToList();
+            return _db.Users.ToList();
         }
         [HttpGet("GetRecord")]
-        public Blog GetByID(int id)
+        public User GetByID(int id)
         {
-            return _db.Blogs.Find(id);
+            return _db.Users.Find(id);
         }
-        [HttpPost("CreateBlog")]
-        public bool AddRecord(Blog B)
+        [HttpGet("GetUser")]
+        public User GetByNameAndPassword(string username, string password)
+        {
+            return _db.Users.SingleOrDefault(x => x.UserName == username && x.Password == password);
+        }
+        [HttpPost("CreateUser")]
+        public bool AddRecord(User B)
         {
             try
             {
-                _db.Blogs.Add(B);
+                _db.Users.Add(B);
                 return _db.SaveChanges() > 0 ? true : false;
             }
             catch (Exception)
@@ -40,17 +44,17 @@ namespace BlogersProject.WebApi.Controllers
                 return false;
             }
         }
-        [HttpPut("UpdateBlog")]
-        public bool UpdateRecord(Blog B)
+        [HttpPut("UpdateUser")]
+        public bool UpdateRecord(User B)
         {
             try
             {
-                var Record = _db.Blogs.Find(B.Id);
-                Record.BlogTitle = B.BlogTitle;
-                Record.BlogPost = B.BlogPost;
-                Record.Blogger = B.Blogger;
-                Record.BlogDate = DateTime.Now;
-                _db.Blogs.Update(Record);
+                var Record = _db.Users.Find(B.Id);
+                Record.Name = B.Name;
+                Record.Phone= B.Phone;
+                Record.Email= B.Email;
+                Record.Password= B.Password;
+                _db.Users.Update(Record);
                 return _db.SaveChanges() > 0 ? true : false;
             }
             catch (Exception)
@@ -58,18 +62,13 @@ namespace BlogersProject.WebApi.Controllers
                 return false;
             }
         }
-        [HttpDelete("DeleteBlog")]
+        [HttpDelete("DeleteUser")]
         public bool DeleteRecord(int id)
         {
             try
             {
-
-                foreach (var item in _db.Comments.Where(x => x.BlogId == id).ToList())
-                {
-                    _db.Comments.Remove(item);
-                }
-                var Record = _db.Blogs.Find(id);
-                _db.Blogs.Remove(Record);
+                var Record = _db.Users.Find(id);
+                _db.Users.Remove(Record);
                 return _db.SaveChanges() > 0 ? true : false;
             }
             catch (Exception)
@@ -78,5 +77,6 @@ namespace BlogersProject.WebApi.Controllers
                 return false;
             }
         }
+
     }
 }

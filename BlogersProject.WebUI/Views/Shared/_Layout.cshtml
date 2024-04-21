@@ -27,8 +27,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-controller="Home"asp-action="Index">Ana Sayfa</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-controller="Home" asp-action="About">Hakkında</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-controller="Home" asp-action="Contact">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-controller="About" asp-action="Index">Hakkında</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-controller="Contact" asp-action="Index">İletişim</a></li>
                 </ul>
             </div>
         </div>
@@ -41,18 +41,26 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <ul class="list-inline text-center">
                         <li class="list-inline-item">
-                            <a target="_blank" href="#!">
+                            <a target="_blank" href="https://twitter.com/hssn_kck">
                                 <span class="fa-stack fa-lg">
                                     <i class="fas fa-circle fa-stack-2x"></i>
                                     <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
                                 </span>
                             </a>
-                        </li>
-                        <li target="_blank" class="list-inline-item">
-                            <a href="#!">
+                        </li> 
+                        <li class="list-inline-item">
+                            <a target="_blank" href="https://www.instagram.com/hssn_kck">
                                 <span class="fa-stack fa-lg">
                                     <i class="fas fa-circle fa-stack-2x"></i>
-                                    <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a target="_blank" href="https://www.linkedin.com/in/m-hasan-k%C3%BC%C3%A7%C3%BCk-572837285">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
                                 </span>
                             </a>
                         </li>
@@ -65,7 +73,7 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="small text-center text-muted fst-italic"> BilGin BloG Telif hakkı &copy;Tüm Hakları Saklıdır @DateTime.Now.Year</div>
+                    <div class="small text-center text-muted fst-italic"> BilGin BloG Telif hakkı &copy; Tüm Hakları Saklıdır @DateTime.Now.Year Geliştirici <a asp-controller="Home" asp-action="Developer" style=" color:cadetblue; text-decoration:none;"> M. Hasan Küçük</a></div>
                 </div>
             </div>
         </div>

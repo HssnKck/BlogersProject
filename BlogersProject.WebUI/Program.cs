@@ -2,13 +2,19 @@ using BlogersProject.Model.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Add services to the container.
 builder.Services.AddMvc(); 
 builder.Services.AddDbContext<Context>();
-
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.Cookie.Name = "Users";
+    options.LoginPath = "/Login/Index";
+    options.AccessDeniedPath = "/Login/Index";
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,7 +30,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapAreaControllerRoute(
     name: "default",
     areaName: "Admin",

@@ -1,0 +1,6 @@
+﻿@model IEnumerable<BlogersProject.Model.Entities.Blog>
+@foreach (var item in Model)
+{
+    <li><a asp-area="Admin" asp-controller="Comment" asp-action="Index" asp-route-id="@item.Id">@item.BlogTitle</a></li>
+}
+

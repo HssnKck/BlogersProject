@@ -18,6 +18,7 @@ namespace BlogersProject.Model.Concrete
         }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
     }

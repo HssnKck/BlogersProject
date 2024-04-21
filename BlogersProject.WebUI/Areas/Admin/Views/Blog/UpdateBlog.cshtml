@@ -2,32 +2,55 @@
 @{
     ViewData["Title"] = "UpdateBlog";
 }
-
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<form method="post" asp-area="Admin" asp-controller="Blog" asp-action="UpdateBlog">
-    <input type="text" asp-for="BlogTitle" value="@Model.BlogTitle" />
-    <input type="text" asp-for="BlogFirst" value="@Model.BlogFirst" />
-    <input type="text" asp-for="BlogPost" value="@Model.BlogPost" />
-    <input type="text" asp-for="Blogger" value="@Model.Blogger" />
-    <input type="submit" value="kaydet">
-</form>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-validation">
+                        <form class="form-valide" method="post" asp-area="Admin" asp-controller="Blog" asp-action="UpdateBlog">
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">
+                                    Başlık <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="val-username" placeholder="Lütfen Başlık Giriniz" asp-for="BlogTitle" value="@Model.BlogTitle">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">
+                                    Özet Cümle <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="val-username" placeholder="Lütfen Özet Cümle Giriniz" asp-for="BlogFirst" value="@Model.BlogFirst">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-suggestions">
+                                    Blog İçeriği <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <textarea class="form-control" id="val-suggestions" rows="5" placeholder="Lütfen Blog İçeriği Giriniz" asp-for="BlogPost" value="@Model.BlogPost"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">
+                                    Yazar Adı <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="val-username" placeholder="Lütfen Yazar Adı Giriniz" asp-for="Blogger" value="@Model.Blogger">
+                                </div>
+                            </div>
+                            <input type="hidden" asp-for="Id" value="@Model.Id"/>
+                            <div class="form-group row">
+                                <div class="col-lg-8 ml-auto">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

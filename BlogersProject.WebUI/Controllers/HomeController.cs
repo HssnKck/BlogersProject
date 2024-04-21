@@ -1,5 +1,6 @@
 using BlogersProject.Model.Concrete;
 using BlogersProject.Model.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -26,6 +27,10 @@ namespace BlogersProject.WebUI.Controllers
                     return RedirectToAction("Eror", "Home");
                 }
             }
+        }
+        public IActionResult Developer()
+        {
+            return View();
         }
         public IActionResult Eror()
         {

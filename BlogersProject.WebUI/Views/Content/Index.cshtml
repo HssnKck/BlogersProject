@@ -24,7 +24,7 @@
                 <p class="post-meta">
                     Blog Yazarı
                     <a href="#">@Model.Blogger</a>
-                    Tarih; @Model.
+                    Tarih; @Model.BlogDate
 
                 </p>
                 @await Component.InvokeAsync("ContentCommentsPartial",Model.Id)
@@ -36,7 +36,7 @@
                         <input class="form-control" id="name" type="text" placeholder="Enter your name..." name="Name" />
                         <label for="name">İsminiz</label>
                     </div>
-                    <div class="form-floating">
+                    <div class="form-floating"> 
                         <textarea class="form-control" id="message" placeholder="Enter your message here..." name="Comment" style="height: 12rem"></textarea>
                         <label for="message">Yorumunuz...</label>
                     </div>
