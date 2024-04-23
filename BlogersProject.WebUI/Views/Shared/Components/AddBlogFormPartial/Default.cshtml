@@ -11,13 +11,11 @@
             <input class="form-control" id="name" type="text" placeholder="Lütfen Özet Cümle Giriniz" asp-for="BlogFirst" />
             <label for="name">Özet Cümle</label>
         </div>
-    </div> 
-    <div class="form-group row">
-        <div class="form-floating">
-            <input class="form-control" id="name" type="text" placeholder="Lütfen Blog İçeriği Giriniz" asp-for="BlogPost" />
-            <label for="name">Blog İçeriği</label>
-        </div>
-    </div> 
+    </div>
+    <div class="form-floating">
+        <textarea class="form-control" id="message" placeholder="Lütfen Blog İçeriği Giriniz" asp-for="BlogPost" style="height: 12rem"></textarea>
+        <label for="message">Blog İçeriği</label>
+    </div>
     <div class="form-group row">
         <div class="form-floating">
             <input class="form-control" id="name" type="text" placeholder="Lütfen Yazar Adı Giriniz" asp-for="Blogger" />

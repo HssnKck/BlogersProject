@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BlogersProject.Model.Entities.UnapprovedUser>
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <h1 style="text-align:center">Onay Bekleyen Kullanıcılar</h1>
+            <div class="table-responsive">
+                <table class="table table-bordered verticle-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">Kullanıcı Adı</th>
+                            <th scope="col">Blogger Adı</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telefon Numarası</th>
+                            <th scope="col">Rolü</th>
+                            <th scope="col">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.UserName</td>
+                                <td>@item.Name</td>
+                                <td>@item.Email</td>
+                                <td>@item.Phone</td>
+                                <td>@item.Role</td>
+                                <td>
+                                    <a class="btn mb-1 btn-success" asp-area="Admin" asp-controller="Blogger" asp-action="ConfirmUser" asp-route-id="@item.Id">
+                                        Onayla <span class="btn-icon-right"><i class="fa fa-check"></i></span>
+                                    </a>
+                                    <a class="btn mb-1 btn-danger" asp-area="Admin" asp-controller="Blogger" asp-action="RemoveUser" asp-route-id="@item.Id" >
+                                        Reddet <span class="btn-icon-right"><i class="fa fa-close"></i></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

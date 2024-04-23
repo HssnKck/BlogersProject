@@ -33,7 +33,6 @@ namespace CommentersProject.WebApi.Controllers
         {
             return _db.Comments.SingleOrDefault(x=>x.Id==id);
         }
-        
         [HttpPost("CreateComment")]
         public bool AddRecord(Comment B)
         {

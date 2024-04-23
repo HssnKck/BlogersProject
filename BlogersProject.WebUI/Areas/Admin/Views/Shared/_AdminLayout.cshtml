@@ -16,13 +16,13 @@
         <div class="nk-sidebar">
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-
-                    <li class="nav-label">Admin Paneli</li>
+                    <li class="nav-label">Ana Sayfa Paneli</li>
                     <li>
                         <a asp-area="Admin" asp-controller="Home" asp-action="Index" aria-expanded="false">
                             <img style="width: 15px; height: 15px;" src="~/images/home.png" /><span class="nav-text"> Ana Sayfa</span>
                         </a>
                     </li>
+                    <li class="nav-label">Blog Paneli</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">Bloglar</span>
@@ -39,25 +39,16 @@
                             @await Component.InvokeAsync("CommentListPartial")
                         </ul>
                     </li>
-                    <li class="nav-label">Apps</li>
+                    <li class="nav-label">Blogger Paneli</li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
+                        <a asp-area="Admin" asp-controller="Blogger" asp-action="List" aria-expanded="false">
+                            <i class="icon-menu menu-icon"></i><span class="nav-text">Blogger Listesi</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./email-inbox.html">Inbox</a></li>
-                            <li><a href="./email-read.html">Read</a></li>
-                            <li><a href="./email-compose.html">Compose</a></li>
-                        </ul>
                     </li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Apps</span>
+                        <a asp-area="Admin" asp-controller="Blogger" asp-action="Index" aria-expanded="false">
+                            <i class="icon-notebook menu-icon"></i><span class="nav-text">Onay Bekleyen Kayıtlar</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a href="./app-calender.html">Calender</a></li>
-                        </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">

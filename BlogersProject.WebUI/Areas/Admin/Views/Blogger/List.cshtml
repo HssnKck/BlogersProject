@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BlogersProject.Model.Entities.User>
+@{
+    ViewData["Title"] = "List";
+}
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <h1 style="text-align:center">Bloggerlar</h1>
+            <div class="table-responsive">
+                <table class="table table-bordered verticle-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">Kullanıcı Adı</th>
+                            <th scope="col">Blogger Adı</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telefon Numarası</th>
+                            <th scope="col">Rolü</th>
+                            <th scope="col">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.UserName</td>
+                                <td>@item.Name</td>
+                                <td>@item.Email</td>
+                                <td>@item.Phone</td>
+                                <td>@item.Role</td>
+                                <td>
+                                    <a asp-area="Admin" asp-controller="Blogger" asp-action="DeleteUser" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Sil"><i class="fa fa-close color-danger"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

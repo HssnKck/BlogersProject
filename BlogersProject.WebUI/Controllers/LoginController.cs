@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using System.Text;
 
 namespace BlogersProject.WebUI.Controllers
 {
@@ -25,6 +26,7 @@ namespace BlogersProject.WebUI.Controllers
                 {
                     var claims = new List<Claim>
                             {
+                                new Claim(ClaimTypes.UserData, user.UserName),
                                 new Claim(ClaimTypes.Name, user.Name),
                                 new Claim(ClaimTypes.Email, user.Email),
                                 new Claim(ClaimTypes.MobilePhone, user.Phone),
@@ -48,10 +50,55 @@ namespace BlogersProject.WebUI.Controllers
                     {
                         return RedirectToAction("Index", "Home", new { area = "Admin" });
                     }
-                    return RedirectToAction("Index", "Blogger", new { id = user.Id });
+                    return RedirectToAction("Profile", "Blogger", new { id = user.Id });
                 }
             }
             return RedirectToAction("Eror", "Home");
+        }
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(UnapprovedUser uU)
+        {
+            try
+            {
+                var jsonData = JsonConvert.SerializeObject(uU);
+
+                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                using (var client = new HttpClient())
+                {
+                    var result = await client.PostAsync("https://localhost:7053/api/UnapprovedUsers/CreateUnapprovedUser", content);
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var a = Convert.ToBoolean(await result.Content.ReadAsStringAsync());
+                        if (a)
+                        {
+                            return RedirectToAction("Confirm", "Login");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Eror", "Home");
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Eror", "Home");
+            }
+            return RedirectToAction("Eror", "Home");
+        }
+        public IActionResult Confirm()
+        {
+            return View();
+        }
+        public async Task<IActionResult> Exit()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
         }
         private async Task<User> GetRecordAsync(string username, string password)
         {

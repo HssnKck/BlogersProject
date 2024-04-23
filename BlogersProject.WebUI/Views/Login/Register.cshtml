@@ -1,7 +1,8 @@
-﻿@model BlogersProject.Model.Entities.User
+﻿@model BlogersProject.Model.Entities.UnapprovedUser
 @{
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,18 +17,36 @@
     <link href="~/css/LoginPanel.css" rel="stylesheet">
 </head>
 <body>
-    <form asp-controller="Login" asp-action="Index" method="post">
+    <form asp-controller="Login" asp-action="Register" method="post">
         <div class="login__forms">
+            <label style="color:dimgray; text-decoration: none; float: right;">Lütfen Blog Yazarı Olmak İçin Aşağıdaki Bilgileri Doldurun.</label>
+            <br />
             <div class="login__box">
                 <ion-icon class="fs-20"></ion-icon>
                 <input type="text" asp-for="UserName" placeholder="Kullanıcı Adı" autocomplete="off">
+            </div> 
+            <div class="login__box">
+                <ion-icon class="fs-20"></ion-icon>
+                <input type="text" asp-for="Name" placeholder="Blogger Adı" autocomplete="off">
+            </div>
+            <div class="login__box">
+                <ion-icon class="fs-20"></ion-icon>
+                <input type="email" asp-for="Email" placeholder="Email" autocomplete="off">
+            </div>
+            <div class="login__box">
+                <ion-icon class="fs-20"></ion-icon>
+                <input type="text" asp-for="Phone" placeholder="Telefon Numarası" autocomplete="off">
             </div>
             <div class="login__box">
                 <ion-icon class="fs-20" name="lock-closed-outline"></ion-icon>
                 <input type="password" asp-for="Password" placeholder="Şifreniz">
             </div>
-            <a style=" color:dimgray; text-decoration: none; float: right;" asp-controller="Login" asp-action="Register">Blogger Olarak Bir Kaydın Yok Mu?</a>
-            <br />
+            <div class="login__box">
+                <ion-icon class="fs-20" name="lock-closed-outline"></ion-icon>
+                <input type="password" asp-for="ConfirmPassword" placeholder="Tekrar Şifreniz">
+            </div>
+            <input type="hidden" value="Blogger"  asp-for="Role"/>
+            
             <input class="btn-login" type="submit" value="Giriş" />
         </div>
     </form>
