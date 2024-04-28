@@ -20,6 +20,7 @@ namespace BlogersProject.Model.Concrete
         public DbSet<Comment> Comments { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UnapprovedUser> UnapprovedUsers { get; set; }
+        public DbSet<UnapprovedBlog> UnapprovedBlogs { get; set; }
 
 
     }

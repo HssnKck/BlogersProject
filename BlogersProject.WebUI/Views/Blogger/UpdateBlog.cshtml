@@ -1,6 +1,6 @@
-﻿@model BlogersProject.Model.Entities.User
+﻿@model BlogersProject.Model.Entities.Blog
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "UpdateBlog";
 }
 <!-- Page Header-->
 <header class="masthead" style="background-color :cadetblue">
@@ -8,8 +8,8 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="post-heading">
-                    <h1>Merhaba, @Model.Name</h1>
-                    <h5>Sana Özel Hazırladığımız Blogger Sayfasına Hoşgeldin</h5>
+                    <h1>@Model.BlogTitle</h1>
+                    <h5>Sana Özel Hazırladığımız Güncelleme Sayfasına Hoşgeldin</h5>
                 </div>
             </div>
         </div>
@@ -21,38 +21,39 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <p>
-                    Yazılımla alakalı bildiğiniz herhangi bir konuda yazı yazabilirsiniz. İyi çalışmalar dileriz...
+                    Bloğunu Güncelleyebilirsin. İyi çalışmalar dileriz...
                 </p>
-                <form class="form-valide" method="post" asp-controller="Blogger" asp-action="Index">
+                <form class="form-valide" method="post" asp-controller="Blogger" asp-action="UpdateBlog">
                     <div class="form-group row">
                         <div class="form-floating">
-                            <input class="form-control" id="name" type="text" placeholder="Lütfen Başlık Giriniz" name="BlogTitle" />
+                            <input class="form-control" id="name" type="text" placeholder="Lütfen Başlık Giriniz" asp-for="BlogTitle" value="@Model.BlogTitle" />
                             <label for="name">Başlık</label>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="form-floating">
-                            <input class="form-control" id="name" type="text" placeholder="Lütfen Özet Cümle Giriniz" name="BlogFirst" />
+                            <input class="form-control" id="name" type="text" placeholder="Lütfen Özet Cümle Giriniz" asp-for="BlogFirst" value="@Model.BlogFirst" />
                             <label for="name">Özet Cümle</label>
                         </div>
                     </div>
                     <div class="form-floating">
-                        <textarea class="form-control" id="message" placeholder="Lütfen Blog İçeriği Giriniz" name="BlogPost" style="height: 12rem"></textarea>
+                        <textarea class="form-control" id="message" placeholder="Lütfen Blog İçeriği Giriniz" asp-for="BlogPost" value="@Model.BlogPost" style="height: 12rem"></textarea>
                         <label for="message">Blog İçeriği</label>
                     </div>
                     <div class="form-group row">
                         <div class="form-floating">
-                            <input class="form-control" id="name" type="text" placeholder="Lütfen Yazar Adı Giriniz" name="Blogger" value="@Model.Name">
+                            <input class="form-control" id="name" type="text" placeholder="Lütfen Yazar Adı Giriniz" asp-for="Blogger" value="@Model.Blogger">
                             <label for="name">Yazar Adı</label>
                         </div>
                     </div>
-                    <input type="hidden" name="UserInt" value="@Model.Id" />
+                    <input type="hidden" name="UserId" value="@Model.UserId" />
                     <br />
                     <div class="d-flex justify-content-end mb-4">
-                        <input type="submit" class="btn btn-primary" value="Ekle" />
+                        <input type="submit" class="btn btn-primary" value="Güncelle" />
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </article>
+

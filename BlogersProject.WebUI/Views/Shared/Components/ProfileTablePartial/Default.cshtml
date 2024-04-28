@@ -1,0 +1,18 @@
+﻿@model IEnumerable<BlogersProject.Model.Entities.Blog>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.BlogTitle</td>
+        <td>@item.BlogFirst</td>
+        <td>@item.BlogPost</td>
+        <td>@item.Blogger</td>
+        <td>@item.BlogDate</td>
+        <td>
+            <span>
+                <a asp-controller="Blogger" asp-action="UpdateBlog" asp-route-id="@item.Id" asp data-toggle="tooltip" data-placement="top" title="Düzenle"><i class="fa fa-pencil colFo-muted m-r-5"></i></a>
+                <a asp-controller="Blogger" asp-action="DeleteBlog" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Sil"><i class="fa fa-close color-danger"></i></a>
+                <a asp-controller="Blogger" asp-action="ListComment" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Yorumlar"><i class="fa fa-paper-plane"></i></a>
+            </span>
+        </td>
+    </tr>
+}

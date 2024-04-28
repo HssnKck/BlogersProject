@@ -29,17 +29,23 @@ namespace BlogersProject.WebUI.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Index(Blog B)
+        public async Task<IActionResult> Index(string BlogTitle, string BlogFirst, string BlogPost, string Blogger, int UserInt)
         {
+
             try
             {
-                var jsonData = JsonConvert.SerializeObject(B);
-
-                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
+                var unapprovedBlog = new UnapprovedBlog();
+                unapprovedBlog.BlogTitle = BlogTitle;
+                unapprovedBlog.BlogFirst = BlogFirst;
+                unapprovedBlog.BlogPost = BlogPost;
+                unapprovedBlog.Blogger = Blogger;
+                unapprovedBlog.UserInt = UserInt;
                 using (var client = new HttpClient())
                 {
-                    var result = await client.PostAsync("https://localhost:7053/api/Blogs/CreateBlog", content);
+                
+                    var jsondata = JsonConvert.SerializeObject(unapprovedBlog);
+                    var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
+                    var result =  await client.PostAsync("https://localhost:7053/api/UnapprovedBlogs/CreateUnapprovedBlog", content);
                     if (result.IsSuccessStatusCode)
                     {
                         var a = Convert.ToBoolean(await result.Content.ReadAsStringAsync());
@@ -116,6 +122,112 @@ namespace BlogersProject.WebUI.Controllers
             }
             return RedirectToAction("Eror", "Home");
         }
+        public async Task<IActionResult> UpdateBlog(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var result = await client.GetAsync($"https://localhost:7053/api/Blogs/GetRecord?id={id}");
+                if (result.IsSuccessStatusCode)
+                {
+                    var content = await result.Content.ReadAsStringAsync();
+                    var blog = JsonConvert.DeserializeObject<Blog>(content);
+                    return View(blog);
+                }
+                else
+                {
+                    return RedirectToAction("Eror", "Home");
+                }
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateBlog(Blog B)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var json = JsonConvert.SerializeObject(B);
 
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    var result = await client.PutAsync("https://localhost:7053/api/Blogs/UpdateBlog", content);
+
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var a = Convert.ToBoolean(await result.Content.ReadAsStringAsync());
+                        if (a)
+                        {
+                            return RedirectToAction("Profile", "Blogger");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Eror", "Home");
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Eror", "Home");
+            }
+            return RedirectToAction("Eror", "Home");
+        }
+        public async Task<IActionResult> DeleteBlog(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var result = await client.DeleteAsync($"https://localhost:7053/api/Blogs/DeleteBlog?id={id}");
+                if (result.IsSuccessStatusCode)
+                {
+                    var a = Convert.ToBoolean(await result.Content.ReadAsStringAsync());
+                    if (a)
+                    {
+                        return RedirectToAction("Profile", "Blogger");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Eror", "Home");
+                    }
+                }
+                return RedirectToAction("Eror", "Home");
+            }
+        }
+        public async Task<IActionResult> ListComment(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var result = await client.GetAsync($"https://localhost:7053/api/Comments/GetListById?id={id}");
+                if (result.IsSuccessStatusCode)
+                {
+                    var content = await result.Content.ReadAsStringAsync();
+                    var comment = JsonConvert.DeserializeObject<List<Comment>>(content);
+                    return View(comment);
+                }
+                else
+                {
+                    return RedirectToAction("Eror", "Home");
+                }
+            }
+        }
+        public async Task<IActionResult> DeleteComment(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var result = await client.DeleteAsync($"https://localhost:7053/api/Comments/DeleteComment?id={id}");
+                if (result.IsSuccessStatusCode)
+                {
+                    var a = Convert.ToBoolean(await result.Content.ReadAsStringAsync());
+                    if (a)
+                    {
+                        return RedirectToAction("Profile", "Blogger");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Eror", "Home");
+                }
+            }
+            return RedirectToAction("Eror", "Home");
+        }
     }
 }

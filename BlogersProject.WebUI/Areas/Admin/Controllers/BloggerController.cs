@@ -50,7 +50,7 @@ namespace BlogersProject.WebUI.Areas.Admin.Controllers
         {
             using (var client = new HttpClient())
             {
-                var Uusers = await GetRecord(id);
+                var Uusers = await GetUserRecord(id);
                 var jsonData = JsonConvert.SerializeObject(Uusers);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                 var result = await client.PostAsync("https://localhost:7053/api/UnapprovedUsers/ConfirmBlogger", content);
@@ -109,7 +109,61 @@ namespace BlogersProject.WebUI.Areas.Admin.Controllers
                 return RedirectToAction("Eror", "Home");
             }
         }
-            private async Task<UnapprovedUser> GetRecord(int id)
+        public async Task<IActionResult> BlogList()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    var result = await client.GetAsync("https://localhost:7053/api/UnapprovedBlogs/GetList");
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var content = await result.Content.ReadAsStringAsync();
+                        var unapprovedBlog = JsonConvert.DeserializeObject<List<UnapprovedBlog>>(content);
+                        return View(unapprovedBlog);
+                    }
+                    return RedirectToAction("Eror", "Home");
+                }
+                catch (Exception)
+                {
+
+                    return RedirectToAction("Eror", "Home");
+                }
+
+            }
+
+        }
+        public async Task<IActionResult> ConfirmBlog(int id)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var Unblog = await GetBlogRecord(id);
+                    var jsondata = JsonConvert.SerializeObject(Unblog);
+                    var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
+                    var result = await client.PostAsync("https://localhost:7053/api/UnapprovedBlogs/ConfirmBlog", content);
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var a = Convert.ToBoolean(await result.Content.ReadAsStringAsync());
+                        if (a)
+                        {
+                            return RedirectToAction("BlogList", "Blogger");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Eror", "Home");
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Eror", "Home");
+            }
+            return RedirectToAction("Eror", "Home");
+        }
+        private async Task<UnapprovedUser> GetUserRecord(int id)
         {
             using (var client = new HttpClient())
             {
@@ -125,7 +179,22 @@ namespace BlogersProject.WebUI.Areas.Admin.Controllers
                 }
             }
         }
-
+        private async Task<UnapprovedBlog> GetBlogRecord(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var result = await client.GetAsync($"https://localhost:7053/api/UnapprovedBlogs/GetRecord?id={id}");
+                if (result.IsSuccessStatusCode)
+                {
+                    var content = await result.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<UnapprovedBlog>(content);
+                }
+                else
+                {
+                    return new UnapprovedBlog();
+                }
+            }
+        }
 
 
 

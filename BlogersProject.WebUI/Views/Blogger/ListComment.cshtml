@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BlogersProject.Model.Entities.Comment>
+@{
+    ViewData["Title"] = "ListComment";
+}
+<!-- Page Header-->
+<header class="masthead" style="background-color :cadetblue">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>Bloğuna Yorum Yapanlar</h1>
+                    <h5>Sana Özel Hazırladığımız Blogger Sayfasına Hoşgeldin</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2 style="text-align:center">Yorumlar</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered verticle-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Yorum</th>
+                                    <th scope="col">Yorum Yapan</th>
+                                    <th scope="col">Yorumun Yapıdığı Tarih</th>
+                                    <th scope="col">İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Comments</td>
+                                        <td>@item.Commentators</td>
+                                        <td>@item.CommentDate</td>
+                                        <td>
+                                            <a asp-controller="Blogger" asp-action="DeleteComment" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Sil"><i class="fa fa-close color-danger"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+

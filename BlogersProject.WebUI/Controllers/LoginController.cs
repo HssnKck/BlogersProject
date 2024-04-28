@@ -62,28 +62,37 @@ namespace BlogersProject.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(UnapprovedUser uU)
         {
+            var users = await GetListAsync();
             try
             {
-                var jsonData = JsonConvert.SerializeObject(uU);
-
-                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-                using (var client = new HttpClient())
+                foreach (var item in users)
                 {
-                    var result = await client.PostAsync("https://localhost:7053/api/UnapprovedUsers/CreateUnapprovedUser", content);
-                    if (result.IsSuccessStatusCode)
+                    if (uU.UserName != item.UserName)
                     {
-                        var a = Convert.ToBoolean(await result.Content.ReadAsStringAsync());
-                        if (a)
+
+                    }
+                    var jsonData = JsonConvert.SerializeObject(uU);
+
+                    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    using (var client = new HttpClient())
+                    {
+                        var result = await client.PostAsync("https://localhost:7053/api/UnapprovedUsers/CreateUnapprovedUser", content);
+                        if (result.IsSuccessStatusCode)
                         {
-                            return RedirectToAction("Confirm", "Login");
-                        }
-                        else
-                        {
-                            return RedirectToAction("Eror", "Home");
+                            var a = Convert.ToBoolean(await result.Content.ReadAsStringAsync());
+                            if (a)
+                            {
+                                return RedirectToAction("Confirm", "Login");
+                            }
+                            else
+                            {
+                                return RedirectToAction("Eror", "Home");
+                            }
                         }
                     }
                 }
+               
             }
             catch (Exception)
             {
@@ -126,6 +135,21 @@ namespace BlogersProject.WebUI.Controllers
                     return JsonConvert.DeserializeObject<List<User>>(content);
                 }
                 return new List<User>();
+            }
+        }
+
+        private async Task<List<UnapprovedUser>> GetUnapprovedUserListAsync()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync("https://localhost:7053/api/Users/GetList");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<UnapprovedUser>>(content);
+                }
+                return new List<UnapprovedUser>();
             }
         }
     }

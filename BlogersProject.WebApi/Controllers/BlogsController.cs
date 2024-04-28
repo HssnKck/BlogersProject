@@ -22,6 +22,11 @@ namespace BlogersProject.WebApi.Controllers
         {
             return _db.Blogs.ToList();
         }
+        [HttpGet("GetByUser")]
+        public List<Blog> GetUserList(int id)
+        {
+            return _db.Blogs.Where(x=> x.UserId == id).ToList();
+        }
         [HttpGet("GetRecord")]
         public Blog GetByID(int id)
         {
@@ -47,8 +52,10 @@ namespace BlogersProject.WebApi.Controllers
             {
                 var Record = _db.Blogs.Find(B.Id);
                 Record.BlogTitle = B.BlogTitle;
+                Record.BlogFirst= B.BlogFirst;
                 Record.BlogPost = B.BlogPost;
                 Record.Blogger = B.Blogger;
+                Record.UserId = B.UserId;
                 Record.BlogDate = DateTime.Now;
                 _db.Blogs.Update(Record);
                 return _db.SaveChanges() > 0 ? true : false;
