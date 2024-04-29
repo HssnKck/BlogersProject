@@ -137,20 +137,5 @@ namespace BlogersProject.WebUI.Controllers
                 return new List<User>();
             }
         }
-
-        private async Task<List<UnapprovedUser>> GetUnapprovedUserListAsync()
-        {
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync("https://localhost:7053/api/Users/GetList");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<UnapprovedUser>>(content);
-                }
-                return new List<UnapprovedUser>();
-            }
-        }
     }
 }

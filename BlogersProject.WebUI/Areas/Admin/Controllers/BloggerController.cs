@@ -150,10 +150,7 @@ namespace BlogersProject.WebUI.Areas.Admin.Controllers
                         {
                             return RedirectToAction("BlogList", "Blogger");
                         }
-                        else
-                        {
-                            return RedirectToAction("Eror", "Home");
-                        }
+                        return RedirectToAction("Eror", "Home");
                     }
                 }
             }
@@ -162,6 +159,18 @@ namespace BlogersProject.WebUI.Areas.Admin.Controllers
                 return RedirectToAction("Eror", "Home");
             }
             return RedirectToAction("Eror", "Home");
+        }
+        public async Task<IActionResult> RemoveBlog(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var result = await client.DeleteAsync($"https://localhost:7053/api/UnapprovedBlogs/DeleteUnapprovedBlog?id={id}");
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("BlogList", "Blogger");
+                }
+                return RedirectToAction("Eror", "Home");
+            }
         }
         private async Task<UnapprovedUser> GetUserRecord(int id)
         {

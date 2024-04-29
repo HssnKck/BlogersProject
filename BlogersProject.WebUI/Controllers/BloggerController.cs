@@ -51,7 +51,7 @@ namespace BlogersProject.WebUI.Controllers
                         var a = Convert.ToBoolean(await result.Content.ReadAsStringAsync());
                         if (a)
                         {
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Confirm", "Blogger");
                         }
                         else
                         {
@@ -65,6 +65,10 @@ namespace BlogersProject.WebUI.Controllers
                 return RedirectToAction("Eror", "Home");
             }
             return RedirectToAction("Eror", "Home");
+        }
+        public IActionResult Confirm()
+        {
+            return View();
         }
         public async Task<IActionResult> Profile()
         {
